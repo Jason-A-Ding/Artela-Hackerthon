@@ -44,6 +44,12 @@ class Aspect implements IPreContractCallJP {
                 }
             } 
         }
+        if (currentCallMethod === ethereum.computeMethodSig('attack()')) {
+            const value = parseInt(input.call!.value.toString());
+            if (value > 1000000) {
+                sys.revert("illegal transaction: incorrect value sent with the attack");
+            }
+        }
     }
 
     /**
